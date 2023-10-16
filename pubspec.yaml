@@ -1,5 +1,5 @@
 name: portfolio
-version: 1.0.0+1
+version: 1.0.0+6
 publish_to: 'none'
 description: Portfolio
 environment:
@@ -13,6 +13,7 @@ dependencies:
   dio: ^5.1.1
   google_fonts: ^4.0.4
   flutter_svg: ^2.0.5
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +24,7 @@ flutter:
   uses-material-design: true
   assets:
    - assets/
+   - assets/profile.jpg
 
 flutter_native_splash:
   color: "#ffffff"

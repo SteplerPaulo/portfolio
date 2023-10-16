@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -13,7 +14,9 @@ class HomeView extends GetView<HomeController> {
           return Scaffold(body: largeScreen());
         } else {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              actions: [socialMedia()],
+            ),
             drawer: sidebar(),
             body: smallScreen(),
           );
@@ -40,7 +43,10 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
         const SizedBox(height: 48),
-        sectionTitle(title: "My Tech Stack", subtitle: ""),
+        sectionTitle(
+            title: "My tech stack",
+            subtitle:
+                "A tech stack is the set of technologies used to develop an application, including programming languages, frameworks, databases, front-end and back-end tools, and APIs"),
         GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -48,21 +54,30 @@ class HomeView extends GetView<HomeController> {
           crossAxisSpacing: 98,
           mainAxisSpacing: 32,
           children: [
+            techStackCard(image: "assets/ts-flutter.svg"),
+            techStackCard(image: "assets/ts-dart.svg"),
             techStackCard(image: "assets/ts-html.svg"),
             techStackCard(image: "assets/ts-css.svg"),
             techStackCard(image: "assets/ts-js.svg"),
             techStackCard(image: "assets/ts-react.svg"),
-            techStackCard(image: "assets/ts-redux.svg"),
+            techStackCard(image: "assets/ts-mui.svg"),
             techStackCard(image: "assets/ts-bootstrap.svg"),
             techStackCard(image: "assets/ts-tailwind.svg"),
             techStackCard(image: "assets/ts-sass.svg"),
+            techStackCard(image: "assets/ts-mysql.svg"),
             techStackCard(image: "assets/ts-git.svg"),
             techStackCard(image: "assets/ts-vscode.svg"),
             techStackCard(image: "assets/ts-github.svg"),
+            techStackCard(image: "assets/ts-gitlab.svg"),
+            techStackCard(image: "assets/ts-postgresql.svg"),
+            techStackCard(image: "assets/ts-aws.svg"),
+            techStackCard(image: "assets/ts-nestjs.svg"),
           ],
         ),
         const SizedBox(height: 48),
-        sectionTitle(title: "Personal Projects", subtitle: ""),
+        sectionTitle(
+            title: "Software projects",
+            subtitle: "Including private & public repository"),
         GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -70,12 +85,15 @@ class HomeView extends GetView<HomeController> {
           crossAxisSpacing: 18,
           mainAxisSpacing: 18,
           children: [
-            projectCard(image: "assets/project.png"),
-            projectCard(image: "assets/project-2.png"),
-            projectCard(image: "assets/project-3.png"),
-            projectCard(image: "assets/project-4.png"),
-            projectCard(image: "assets/project-5.png"),
-            projectCard(image: "assets/project-6.png"),
+            projectCard(image: "assets/akin.png", title: "AKIN"),
+            projectCard(image: "assets/biddit.jpg", title: "Biddit"),
+            projectCard(image: "assets/commisari.png", title: "Commisari"),
+            projectCard(
+                image: "assets/ser.png", title: "Simplified Recordbook"),
+            projectCard(
+                image: "assets/project-5.png",
+                title: "Electronic Enrollment System"),
+            projectCard(image: "assets/project-6.png", title: "Balloonation"),
           ],
         ),
         const SizedBox(height: 48),
@@ -91,29 +109,41 @@ class HomeView extends GetView<HomeController> {
         profilePhoto(),
         profileInfo(),
         const SizedBox(height: 12),
-        sectionTitle(title: "My Tech Stack", subtitle: ""),
+        sectionTitle(
+            title: "My tech stack",
+            subtitle:
+                "A tech stack is the set of technologies used to develop an application, including programming languages, frameworks, databases, front-end and back-end tools, and APIs"),
         GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 6,
+          crossAxisCount: 5,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
           children: [
+            techStackCard(image: "assets/ts-flutter.svg"),
+            techStackCard(image: "assets/ts-dart.svg"),
             techStackCard(image: "assets/ts-html.svg"),
             techStackCard(image: "assets/ts-css.svg"),
             techStackCard(image: "assets/ts-js.svg"),
             techStackCard(image: "assets/ts-react.svg"),
-            techStackCard(image: "assets/ts-redux.svg"),
+            techStackCard(image: "assets/ts-mui.svg"),
             techStackCard(image: "assets/ts-bootstrap.svg"),
             techStackCard(image: "assets/ts-tailwind.svg"),
             techStackCard(image: "assets/ts-sass.svg"),
+            techStackCard(image: "assets/ts-mysql.svg"),
             techStackCard(image: "assets/ts-git.svg"),
             techStackCard(image: "assets/ts-vscode.svg"),
             techStackCard(image: "assets/ts-github.svg"),
+            techStackCard(image: "assets/ts-gitlab.svg"),
+            techStackCard(image: "assets/ts-postgresql.svg"),
+            techStackCard(image: "assets/ts-aws.svg"),
+            techStackCard(image: "assets/ts-nestjs.svg"),
           ],
         ),
         const SizedBox(height: 12),
-        sectionTitle(title: "Personal Projects", subtitle: ""),
+        sectionTitle(
+            title: "Software projects",
+            subtitle: "Including private & public repository"),
         GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -121,12 +151,16 @@ class HomeView extends GetView<HomeController> {
           crossAxisSpacing: 0,
           mainAxisSpacing: 8,
           children: [
-            projectCard(image: "assets/project.png"),
-            projectCard(image: "assets/project-2.png"),
-            projectCard(image: "assets/project-3.png"),
-            projectCard(image: "assets/project-4.png"),
-            projectCard(image: "assets/project-5.png"),
-            projectCard(image: "assets/project-6.png"),
+            projectCard(image: "assets/project.png", title: "AKIN"),
+            projectCard(image: "assets/project-2.png", title: "Biddit"),
+            projectCard(image: "assets/project-3.png", title: "Commisari"),
+            projectCard(
+                image: "assets/project-4.png",
+                title: "Simplified Electronic Recordbook"),
+            projectCard(
+                image: "assets/project-5.png",
+                title: "Electronic Enrollment System"),
+            projectCard(image: "assets/project-6.png", title: "Balloonation"),
           ],
         ),
         const Divider(),
@@ -139,7 +173,7 @@ class HomeView extends GetView<HomeController> {
   Widget navbarWeb() {
     return Row(
       children: [
-        const Text('Paulo Biscocho'),
+        // const Text('Paulo Biscocho'),
         const Spacer(),
         pagesButton(),
         socialMedia(),
@@ -153,6 +187,16 @@ class HomeView extends GetView<HomeController> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Text(
+              'Paulo Biscocho',
+              style: Get.textTheme.titleMedium?.copyWith(
+                foreground: Paint()
+                  ..shader = const LinearGradient(
+                    //colors: <Color>[Color(0xffDA44bb), Color(0xff8921aa)],
+                    colors: <Color>[Color(0xFFF45050), Color(0xFF3C486B)],
+                  ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
+              ),
+            ),
             const Spacer(),
             contactInfo(),
             const SizedBox(width: 24),
@@ -178,46 +222,67 @@ class HomeView extends GetView<HomeController> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Paulo Biscocho",
-          style: Get.textTheme.headlineMedium,
+          'Paulo Biscocho',
+          style: Get.textTheme.headlineMedium?.copyWith(
+            foreground: Paint()
+              ..shader = const LinearGradient(
+                //colors: <Color>[Color(0xffDA44bb), Color(0xff8921aa)],
+                colors: <Color>[Color(0xFFF45050), Color(0xFF3C486B)],
+              ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
+          ),
         ),
         Text(
           "Senior Software Engineer",
-          style: Get.textTheme.labelMedium,
+          style: Get.textTheme.labelLarge,
         ),
         const SizedBox(height: 12),
         Text(
-          "As a seasoned software engineer with over a decade of experience, I bring a wealth of expertise in developing and maintaining top-notch software solutions. My skills in creating scalable and maintainable source code have led to successful enterprise-level releases, and my proficiency in relational databases and version control tools allow me to produce reliable and efficient software services. With a passion for innovation and a dedication to excellence, I am always seeking new opportunities to apply my skills and drive meaningful results.",
-          style: Get.textTheme.labelLarge,
+          "A seasoned software engineer with over a decade of experience. Expert in developing and maintaining top-notch software solutions. With a passion for innovation and a dedication to excellence, I am always seeking new opportunities to apply my skills and drive meaningful results.",
+          style: Get.textTheme.labelMedium,
         ),
       ],
     );
   }
 
   Widget profilePhoto() {
-    return CircleAvatar(
-      radius: 120,
-      backgroundColor: Get.theme.colorScheme.secondary,
-      child: const CircleAvatar(
-        backgroundImage: AssetImage("assets/profile.jpg"),
-        radius: 110,
+    return Container(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      padding: const EdgeInsets.all(5), // Border width
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Color(0xFFF45050), Color(0xFF3C486B)],
+        ),
+      ),
+      child: ClipOval(
+        child: Image.asset(
+          "assets/pau.jpg",
+          fit: BoxFit.contain,
+          width: 260,
+          height: 260,
+          // width: 260,
+        ),
       ),
     );
   }
 
   Widget sectionTitle({title, subtitle}) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
           title,
           style: Get.textTheme.headlineSmall,
-          textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
         Text(
           subtitle,
-          textAlign: TextAlign.center,
+          style: Get.textTheme.bodySmall,
         ),
+        const SizedBox(height: 24),
       ],
     );
   }
@@ -226,7 +291,7 @@ class HomeView extends GetView<HomeController> {
     return SvgPicture.asset(image);
   }
 
-  Widget projectCard({image}) {
+  Widget projectCard({image, title}) {
     return Card(
       elevation: 0,
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -249,7 +314,7 @@ class HomeView extends GetView<HomeController> {
             ),
             const SizedBox(height: 12),
             Text(
-              "Project name goes here...",
+              title,
               style: Get.textTheme.titleLarge,
             ),
             const SizedBox(height: 12),
@@ -273,17 +338,26 @@ class HomeView extends GetView<HomeController> {
                     "assets/link.svg",
                     width: 15,
                     height: 15,
+                    colorFilter: ColorFilter.mode(
+                      Get.theme.colorScheme.primary,
+                      BlendMode.srcIn,
+                    ),
                   ),
                   label: const Text("Live Preview"),
                 ),
                 TextButton.icon(
                   onPressed: () {},
-                  icon: SvgPicture.asset(
-                    "assets/github.svg",
-                    width: 15,
-                    height: 15,
-                  ),
-                  label: const Text("View Code"),
+                  // icon: SvgPicture.asset(
+                  //   "assets/github.svg",
+                  //   width: 15,
+                  //   height: 15,
+                  //   colorFilter: ColorFilter.mode(
+                  //     Get.theme.colorScheme.primary,
+                  //     BlendMode.srcIn,
+                  //   ),
+                  // ),
+                  icon: const Icon(Icons.lock),
+                  label: const Text("Private"),
                 )
               ],
             ),
@@ -325,7 +399,9 @@ class HomeView extends GetView<HomeController> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            launchUrl(Uri.parse("https://github.com/SteplerPaulo"));
+          },
           style: TextButton.styleFrom(
               shape: const CircleBorder(), minimumSize: const Size(40, 40)),
           child: SvgPicture.asset(
@@ -339,11 +415,13 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            launchUrl(Uri.parse("https://www.codewars.com/users/steplerpaulo"));
+          },
           style: TextButton.styleFrom(
               shape: const CircleBorder(), minimumSize: const Size(40, 40)),
           child: SvgPicture.asset(
-            "assets/twitter.svg",
+            "assets/codewars.svg",
             width: 20,
             height: 20,
             colorFilter: ColorFilter.mode(
@@ -353,7 +431,9 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            launchUrl(Uri.parse("https://www.linkedin.com/in/paulo-biscocho/"));
+          },
           style: TextButton.styleFrom(
               shape: const CircleBorder(), minimumSize: const Size(40, 40)),
           child: SvgPicture.asset(
@@ -390,6 +470,10 @@ class HomeView extends GetView<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const ListTile(
+            leading: CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage("assets/pau.jpg"),
+            ),
             title: Text("Paulo Biscocho"),
           ),
           const Divider(),
