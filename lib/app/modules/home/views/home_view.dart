@@ -44,7 +44,7 @@ class HomeView extends GetView<HomeController> {
         ),
         const SizedBox(height: 48),
         sectionTitle(
-            title: "My tech stack",
+            title: "Tools & Technology",
             subtitle:
                 "A tech stack is the set of technologies used to develop an application, including programming languages, frameworks, databases, front-end and back-end tools, and APIs"),
         GridView.count(
